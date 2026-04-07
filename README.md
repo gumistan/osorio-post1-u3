@@ -18,3 +18,13 @@ Análisis de columnas del volcado:
 3. Contenido ASCII: Muestra puntos (.) debido a que los valores utilizados no corresponden al rango de caracteres imprimibles (0x20-0x7E).
 Adicionalmente, se exploró el área del PSP (D 0 L20), identificando los bytes CD 20 en la dirección inicial, los cuales corresponden a la instrucción de terminación INT 20 colocada por el sistema operativo.
 
+Checkpoint 3: Ensamblado y Desensamblado (Comandos A y U)
+Procedimiento y observación:
+Se empleó el comando A (Assemble) para ingresar directamente en la dirección CS:0100 un programa de cuatro instrucciones: MOV AX, 0005, MOV BX, 0003, ADD AX, BX e INT 20.
+Mediante el comando U (Unassemble), se tradujeron los bytes almacenados en memoria de vuelta a mnemónicos de ensamblador para verificar la integridad del código.
+Correspondencia de Código Máquina:
+-   La instrucción MOV AX, 0005 se codifica como B8 05 00, donde B8 es el opcode y 05 00 representa el valor inmediato en formato little-endian.
+-   La instrucción INT 20 se traduce como los bytes CD 20.
+Este proceso demuestra que el procesador interpreta como instrucción cualquier byte al que apunte el registro CS:IP, evidenciando que en modo real no existe una distinción física entre áreas de código y datos.
+
+
